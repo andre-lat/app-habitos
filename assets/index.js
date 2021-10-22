@@ -1,8 +1,9 @@
+// ! FECHAS
 let fechaSpan = document.getElementById('fecha');
 
 function fechaHoy() {
     // let d = new date('Y-m-d H:i:s');
-    let dias = ['Domingo', 'Lunes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    let dias = ['Domingo', 'Lunes', 'Martes','Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     let g = new Date().getDay();
     let d = new Intl.DateTimeFormat('es');
     let f = d.formatToParts();
@@ -73,3 +74,45 @@ function acomodarFecha(mes) {
     //         break;
     // }
 }
+
+// ! SELECT
+let habitsArray = document.querySelectorAll('input[type=checkbox]');
+
+console.log(habitsArray);
+
+let defaultSelect = 0;
+// document.addEventListener('keypress', function(e) {
+document.addEventListener('keydown', function(e) {
+    // e.value
+    console.log('Inicia: ' + defaultSelect);
+    console.log(habitsArray.length);
+    if (e.key == 'ArrowUp' && defaultSelect > 0) {
+
+        // defaultSelect--;
+        putArrow(--defaultSelect);
+        console.log(defaultSelect);
+    }
+    if (e.key == 'ArrowDown' && defaultSelect < (habitsArray.length - 1)) {
+        
+        // defaultSelect++;
+        putArrow(++defaultSelect);
+        console.log(defaultSelect);
+
+    }
+    console.log(e);
+    console.log(e.code);
+    console.log(e.key);
+
+    if (e.key == ' ') {
+        habitsArray[defaultSelect].click();
+    }
+});
+
+function putArrow(where) {
+    habitsArray.forEach(element => {
+        element.classList.remove('select');
+    });
+    habitsArray[where].classList.add('select');
+
+}
+putArrow(defaultSelect);
