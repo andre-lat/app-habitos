@@ -1,0 +1,31 @@
+body{
+    background: #101301;
+    color: #83d63e;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;    
+}
+h1{
+    text-align: center;
+}
+main{
+    /* display: flex; */
+    /* flex-direction: column; */
+    display: grid;
+    grid-template-columns: min-content auto;
+    width: 720px;
+    margin: 0 auto;
+}
+main > *{
+    padding: .5rem;
+    align-self: center;
+}
+main >input{
+    justify-self: center;
+    align-self: center;
+}
+main > span{
+    padding-bottom: 1rem;
+    grid-column: 1 / 3;
+    justify-self: center;
+    align-self: center;
+}
