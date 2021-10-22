@@ -3,7 +3,7 @@ let fechaSpan = document.getElementById('fecha');
 
 function fechaHoy() {
     // let d = new date('Y-m-d H:i:s');
-    let dias = ['Domingo', 'Lunes', 'Martes','Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    let dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     let g = new Date().getDay();
     let d = new Intl.DateTimeFormat('es');
     let f = d.formatToParts();
@@ -18,16 +18,17 @@ function fechaHoy() {
         }
         if (i == 2) {
             fechaSpan.innerHTML += acomodarFecha(element.value);
-        }else{
+        } else {
             fechaSpan.innerHTML += element.value;
         }
-        
+
     }
     // fechaSpan.innerHTML = f[0].value + f[1].value + acomodarFecha(f[2].value) + f[3].value + f[4].value;
     console.log(f);
     console.log(f[0]);
 }
 fechaHoy();
+
 function acomodarFecha(mes) {
 
     mes = mes == 1 ? 'Enero' : mes;
@@ -69,7 +70,7 @@ function acomodarFecha(mes) {
     //     case 1:
     //         mes = Enero;
     //         break;
-    
+
     //     default:
     //         break;
     // }
@@ -77,34 +78,54 @@ function acomodarFecha(mes) {
 
 // ! SELECT
 let habitsArray = document.querySelectorAll('input[type=checkbox]');
+let modal = document.querySelector('.modal');
 
 console.log(habitsArray);
 
 let defaultSelect = 0;
+let modalOpen = 0;
 // document.addEventListener('keypress', function(e) {
-document.addEventListener('keydown', function(e) {
-    // e.value
-    console.log('Inicia: ' + defaultSelect);
-    console.log(habitsArray.length);
-    if (e.key == 'ArrowUp' && defaultSelect > 0) {
-
-        // defaultSelect--;
-        putArrow(--defaultSelect);
-        console.log(defaultSelect);
+document.addEventListener('keydown', function (e) {
+    if (e.key == 'r' && e.ctrlKey == true) {
+        e.preventDefault();
     }
-    if (e.key == 'ArrowDown' && defaultSelect < (habitsArray.length - 1)) {
-        
-        // defaultSelect++;
-        putArrow(++defaultSelect);
-        console.log(defaultSelect);
-
+    // ! ESTE PASO AGREGUÉ AL FINAL
+    if (e.key == 'a' && modalOpen == 0) {
+        e.preventDefault();
+        modal.classList.remove('d-none')
+        modalOpen = 1;
+        document.querySelector('#inputTitle').focus();
     }
-    console.log(e);
-    console.log(e.code);
-    console.log(e.key);
+    if (e.key == 'r' && modalOpen == 1 && e.ctrlKey == true) {
+        modal.classList.add('d-none')
+        modalOpen = 0;
+    }
+    // ? 
+    if (modalOpen == 0) {
 
-    if (e.key == ' ') {
-        habitsArray[defaultSelect].click();
+        // e.value
+        console.log('Inicia: ' + defaultSelect);
+        console.log(habitsArray.length);
+        if (e.key == 'ArrowUp' && defaultSelect > 0) {
+
+            // defaultSelect--;
+            putArrow(--defaultSelect);
+            console.log(defaultSelect);
+        }
+        if (e.key == 'ArrowDown' && defaultSelect < (habitsArray.length - 1)) {
+
+            // defaultSelect++;
+            putArrow(++defaultSelect);
+            console.log(defaultSelect);
+
+        }
+        console.log(e);
+        console.log(e.code);
+        console.log(e.key);
+
+        if (e.key == ' ') {
+            habitsArray[defaultSelect].click();
+        }
     }
 });
 
